@@ -1,0 +1,27 @@
+#/bin/sh
+
+# Tomcat auto-start
+#
+# description: Auto-starts tomcat
+# processname: tomcat
+# pidfile: /var/run/tomcat.pid
+# chkconfig: 234 20 80
+
+
+#export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export JENKINS_HOME=/data/jenkins
+
+
+case $1 in
+start)
+sh /data/tomcat8/bin/startup.sh
+;;
+stop)
+sh /data/tomcat8/bin/shutdown.sh
+;;
+restart)
+sh /data/tomcat8/bin/shutdown.sh
+sh /data/tomcat8/bin/startup.sh
+;;
+esac
+exit 0

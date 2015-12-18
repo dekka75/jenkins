@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="main" name="atome-jenkins">
+    <!-- ============================================  -->
+    <!-- Property                                      -->
+    <!-- ============================================  -->
+    <property name="builddir" value="${project.basedir}/tests/build"/> 
+    <property name="source" value="${project.basedir}"/>
+    <property name="testdir" value="${project.basedir}/tests"/>
+    <property name="cachedir" value="${builddir}/cache"/>
+    <property name="threads" value="4"/>
+    <includepath classpath="${project.basedir}/www" />
+    <!-- ============================================  -->
+    <!-- fileset                                       -->
+    <!-- ============================================  -->
+    <fileset dir="${source}" id="php-files">
+        <include name="**/*.php"/>
+        <exclude name="tests/**"/>
+    </fileset>
+
+    <!-- ============================================  -->
+    <!-- (DEFAULT) Target: main                        -->
+    <!-- ============================================  -->
+    <target description="Start analyzing our application" name="main">
+        <echo msg="Start Build"/>
+        <phingCall target="prepare"/>
+        <parallel threadCount="${threads}">
+            <phingCall target="phploc"/>
+        </parallel>
+        <echo msg="Finished Build"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- (DEFAULT) Target: prepare                     -->
+    <!-- ============================================  -->
+    <target hidden="true" name="prepare">
+        <echo msg="Making directory build"/>
+        <delete dir="${builddir}/api" failonerror="false" includeemptydirs="true" verbose="true"/>
+        <delete dir="${builddir}/coverage" failonerror="false" includeemptydirs="true" verbose="true"/>
+        <delete dir="${builddir}/logs" failonerror="false" includeemptydirs="true" verbose="true"/>
+        <delete dir="${builddir}/pdepend" failonerror="false" includeemptydirs="true" verbose="true"/>
+        <mkdir dir="${builddir}/api"/>
+        <mkdir dir="${builddir}/coverage"/>
+        <mkdir dir="${builddir}/logs"/>
+        <mkdir dir="${builddir}/pdepend"/>
+        <mkdir dir="${cachedir}"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPLoc (PHP Lines of Code)            -->
+    <!-- ============================================  -->
+    <target description="Generate phploc.csv" name="phploc">
+        <phploc reportDirectory="${builddir}/logs" reportName="phploc" reportType="csv">
+            <fileset refid="php-files"/>
+        </phploc>
+    </target>
+
+</project>

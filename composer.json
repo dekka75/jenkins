@@ -1,0 +1,45 @@
+{
+    "name": "root/composer",
+    "authors": [
+        {
+            "name": "Didier KIMES",
+            "email": "didier.kimes@orange.com"
+        }
+    ],
+    "repositories": [
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "sebastian/phpcpd": "dev-master",
+        "phpmd/phpmd": "2.*",
+        "phploc/phploc": "*",
+        "squizlabs/php_codesniffer": "*",
+        "behat/behat": "3.*",
+        "behat/mink": "*",
+        "behat/mink-extension": "*",
+        "justinrainbow/json-schema": "*",
+        "symfony/property-access": "~2.3",
+        "kherge/box": "~2.0",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "theseer/phpdox": "dev-master",
+        "sebastian/phpdcd": "*",
+        "phing/phing": "2.*",
+        "phpunit/php-invoker": "dev-master",
+        "phpunit/dbunit": "^1.3@dev",
+        "phpunit/phpunit-selenium": "dev-master",
+        "phpunit/phpunit-story": "dev-master",
+        "phpunit/phpunit-mock-objects": "2.3.*"
+    },
+    "require-dev":{
+        "phpunit/phpunit": "4.7.*"
+    },
+    "autoload": {
+      "psr-4": {
+        "Sanpi\\Behatch\\": "src/"
+      }
+    },
+    "config": {
+        "bin-dir": "/usr/bin/"
+    }
+}

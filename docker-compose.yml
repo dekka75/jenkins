@@ -1,0 +1,15 @@
+jenkins:
+  build: .
+  
+  container_name: jenkins
+
+  working_dir: /data/jenkins
+  
+  command: /data/tomcat8/bin/catalina.sh run
+
+  volumes:
+#   - /home/atome-dev/jenkins/backup:/home
+    - /home/atome-dev/jenkins/jenkins:/data/jenkins 
+
+  ports:
+    - "4444:4444"
